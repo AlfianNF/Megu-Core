@@ -1,16 +1,3 @@
-Berikut adalah isi file `README.md` yang sudah saya susun dengan gaya visual persis seperti dokumentasi resmi Laravel, namun isinya disesuaikan khusus untuk framework **Lara-Core** milikmu.
-
-Kamu bisa langsung **copy-paste** kode di bawah ini:
-
-```markdown
-<p align="center"><a href="#" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Lara-Core Logo"></a></p>
-
-<p align="center">
-<a href="#"><img src="https://img.shields.io/badge/version-1.0.0-blue.svg" alt="Latest Stable Version"></a>
-<a href="#"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg" alt="License"></a>
-<a href="#"><img src="https://img.shields.io/badge/auth-JWT-orange.svg" alt="Authentication"></a>
-</p>
-
 ## About Megu-Core
 
 **Megu-Core** adalah framework API kustom berbasis Laravel yang dirancang untuk produktivitas maksimal. Framework ini menggunakan pola *Dynamic CRUD* yang memungkinkan Anda membangun backend hanya dengan mendefinisikan tabel di database. 
