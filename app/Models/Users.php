@@ -100,10 +100,10 @@ class Users extends Authenticatable implements JWTSubject
         'role_id' => [
             'linkTable' => 'roles',
             'linkField' => 'id',
+            'selectField' => 'role_name',
             'displayName' => 'rel_role',
         ],
     ];
-
     public static function beforeInsert($input)
     {
         if (isset($input['password']) && !empty($input['password'])) {

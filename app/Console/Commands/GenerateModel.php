@@ -105,6 +105,7 @@ class GenerateModel extends Command
                 $data['fieldRelation'][$col->column_name] = [
                     'table' => $col->ref_table,
                     'field' => $col->ref_column,
+                    'selectField' => $col->ref_column,
                     'alias' => 'rel_' . Str::replaceLast('_id', '', $col->column_name)
                 ];
             }

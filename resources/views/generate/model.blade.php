@@ -25,6 +25,7 @@ class {{ $studly_caps }} extends Model
         '{{ $key }}' => [
             'linkTable' => '{{ $rel['table'] }}',
             'linkField' => '{{ $rel['field'] }}',
+            'selectField' => '{{ $rel['selectField'] }}',
             'displayName' => '{{ $rel['alias'] }}',
         ],
 @endforeach

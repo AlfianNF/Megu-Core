@@ -13,9 +13,10 @@ class Delete extends CoreService
 
     public function prepare($input)
     {
-        // if (!\hasPermission("delete-" . $input["model"])) {
-        //     throw new CoreException("Forbidden", 403);
-        // }
+        if (!hasPermission("delete-" . $input["model"])) {
+            dd($input);
+            throw new CoreException("Forbidden", 403);
+        }
         return $input;
     }
 
