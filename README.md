@@ -16,8 +16,8 @@ Ikuti langkah-langkah di bawah ini untuk menjalankan project di lingkungan lokal
 
 ### 1. Clone Repositori
 ```bash
-git clone [https://github.com/AlfianNF/framework-backend]
-cd framework-backend
+git clone https://github.com/AlfianNF/Megu-Core
+cd Megu-Core
 ```
 
 ### 2. Install Dependencies
