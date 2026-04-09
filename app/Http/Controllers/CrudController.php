@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\CoreService\CallService;
 use Illuminate\Http\Request;
+use App\CoreService\CoreExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CrudController extends Controller
 {
@@ -11,6 +13,7 @@ class CrudController extends Controller
     {
         return CallService::run("Get", ["model" => $model, ...request()->all()]);
     }
+
 
     public function show($model, $id)
     {
@@ -30,6 +33,30 @@ class CrudController extends Controller
     public function delete($model)
     {
         return CallService::run("Delete", ["model" => $model, ...request()->all()]);
+    }
+
+
+
+    public function export(Request $request, $model)
+    {
+        $request->merge([
+            'limit' => 1000, 
+            'model' => $model 
+        ]); 
+        
+        $response = (new \App\Services\Crud\Get)->execute($request->all());
+
+        $data = $response->items(); 
+
+        $classModel = "\\App\\Models\\" . \Illuminate\Support\Str::studly($model);
+        $fields = defined("$classModel::FIELD_LIST") ? $classModel::FIELD_LIST : ['id', 'created_at'];
+
+        $fileName = 'export_' . $model . '_' . date('Ymd_His') . '.xlsx';
+
+        return \Maatwebsite\Excel\Facades\Excel::download(
+            new \App\CoreService\CoreExport(collect($data), $fields), 
+            $fileName
+        );
     }
 
     public function generate($model)

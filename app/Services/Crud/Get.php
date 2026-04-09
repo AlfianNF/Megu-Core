@@ -33,11 +33,8 @@ class Get extends CoreService
                 $linkTable = $relation['linkTable'];
                 $linkField = $relation['linkField'];
                 $alias = $relation['displayName'];
-                
                 $selectField = $relation['selectField'] ?? $linkField;
-
                 $query->leftJoin($linkTable, "$tableName.$foreignKey", "=", "$linkTable.$linkField");
-
                 $query->addSelect(DB::raw("$linkTable.$selectField as $alias"));
             }
         }
@@ -50,9 +47,23 @@ class Get extends CoreService
             });
         }
 
-        foreach ($classModel::FIELD_LIST as $field) {
-            if (isset($input[$field]) && $input[$field] != '') {
-                $query->where($tableName . '.' . $field, $input[$field]);
+        foreach ($input as $key => $value) {
+            if ($value === '' || $value === null) continue;
+
+            $isMin = str_ends_with($key, '_min');
+            $isMax = str_ends_with($key, '_max');
+
+            if ($isMin || $isMax) {
+                $realField = $isMin ? str_replace('_min', '', $key) : str_replace('_max', '', $key);
+
+                if (in_array($realField, $classModel::FIELD_LIST)) {
+                    $operator = $isMin ? '>=' : '<=';
+                    $query->where($tableName . '.' . $realField, $operator, $value);
+                }
+            } else {
+                if (in_array($key, $classModel::FIELD_LIST)) {
+                    $query->where($tableName . '.' . $key, $value);
+                }
             }
         }
 

@@ -1,0 +1,772 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Megu-Core Auto API",
+        "description": "Dokumentasi API CRUD Otomatis & System Routes",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://framework.test/api",
+            "description": "Local Server"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login User",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "username",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "admin"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil Login"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                }
+            }
+        },
+        "/upload-tmp": {
+            "post": {
+                "tags": [
+                    "Storage"
+                ],
+                "summary": "Upload File",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Upload Berhasil"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get List Categories",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Update Categories",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": null,
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Data Updated"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Create Categories",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": null,
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data Created"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Delete Categories",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": null,
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Detail Categories",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    },
+                    "404": {
+                        "description": "Data Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get List Products",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Update Products",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": null,
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "img_products": {
+                                        "type": "string"
+                                    },
+                                    "category_id": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Data Updated"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Create Products",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": null,
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "img_products": {
+                                        "type": "string"
+                                    },
+                                    "category_id": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data Created"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Delete Products",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": null,
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/products/{id}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Detail Products",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    },
+                    "404": {
+                        "description": "Data Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get List Users",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update Users",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": null,
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "fullname": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "telephone": {
+                                        "type": "string"
+                                    },
+                                    "role_id": {
+                                        "type": "string"
+                                    },
+                                    "email_verified_at": {
+                                        "type": "string"
+                                    },
+                                    "status_code": {
+                                        "type": "string"
+                                    },
+                                    "api_token": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Data Updated"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create Users",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": null,
+                                "properties": {
+                                    "fullname": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "telephone": {
+                                        "type": "string"
+                                    },
+                                    "role_id": {
+                                        "type": "string"
+                                    },
+                                    "email_verified_at": {
+                                        "type": "string"
+                                    },
+                                    "status_code": {
+                                        "type": "string"
+                                    },
+                                    "api_token": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data Created"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete Users",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": null,
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Detail Users",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Unauthenticated (Token Error)"
+                    },
+                    "403": {
+                        "description": "Forbidden (No Permission)"
+                    },
+                    "500": {
+                        "description": "Internal Server Error (Bug)"
+                    },
+                    "404": {
+                        "description": "Data Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

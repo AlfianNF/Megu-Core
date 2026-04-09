@@ -44,11 +44,24 @@ class Add extends CoreService
 
         if (defined("$classModel::FIELD_UPLOAD") && !empty($classModel::FIELD_UPLOAD)) {
             foreach ($classModel::FIELD_UPLOAD as $item) {
-                if (isset($input[$item]) && Storage::exists($input[$item])) {
-                    $tmpPath = $input[$item];
-                    $newPath = $classModel::FILEROOT . "/" . basename($tmpPath);
-                    Storage::move($tmpPath, $newPath);
-                    $input[$item] = $newPath;
+                // Cek apakah input mengandung path string (hasil upload-tmp)
+                if (isset($input[$item]) && is_string($input[$item])) {
+                    $currentPath = $input[$item];
+
+                    // Jika file berada di folder 'tmp', pindahkan ke folder permanen
+                    if (str_starts_with($currentPath, 'tmp/')) {
+                        if (Storage::disk('public')->exists($currentPath)) {
+                            $filename = basename($currentPath);
+                            $destFolder = defined("$classModel::FILEROOT") ? $classModel::FILEROOT : 'uploads';
+                            $newPath = $destFolder . '/' . $filename;
+
+                            // Pindahkan file secara fisik
+                            Storage::disk('public')->move($currentPath, $newPath);
+
+                            // Update data yang akan disimpan ke database
+                            $input[$item] = $newPath;
+                        }
+                    }
                 }
             }
         }
