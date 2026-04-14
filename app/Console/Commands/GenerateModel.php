@@ -42,10 +42,11 @@ class GenerateModel extends Command
 
     private function getTables($driver, $dbName, $target) {
         $query = ($driver === 'pgsql') 
-            ? "SELECT table_name FROM information_schema.tables WHERE table_catalog = ? AND table_schema = 'public'"
-            : "SELECT table_name FROM information_schema.tables WHERE table_schema = ?";
+            ? "SELECT table_name AS table_name FROM information_schema.tables WHERE table_catalog = ? AND table_schema = 'public'"
+            : "SELECT table_name AS table_name FROM information_schema.tables WHERE table_schema = ?";
         
         $exclude = ['migrations', 'failed_jobs', 'password_resets', 'personal_access_tokens', 'websockets_statistics_entries'];
+        
         return collect(DB::select($query, [$dbName]))
                 ->filter(fn($t) => !in_array($t->table_name, $exclude))
                 ->filter(fn($t) => $target ? $t->table_name === $target : true);
@@ -125,7 +126,7 @@ class GenerateModel extends Command
         }
         
         return DB::select("
-            SELECT index_name, GROUP_CONCAT(column_name ORDER BY seq_in_index) as column_list
+            SELECT index_name AS index_name, GROUP_CONCAT(column_name ORDER BY seq_in_index) AS column_list
             FROM information_schema.statistics
             WHERE table_schema = ? AND table_name = ? AND non_unique = 0 AND index_name <> 'PRIMARY'
             GROUP BY index_name", [$dbName, $tableName]);
@@ -145,15 +146,19 @@ class GenerateModel extends Command
                         JOIN information_schema.key_column_usage rel_kcu ON rco.unique_constraint_name = rel_kcu.constraint_name
                         WHERE tco.constraint_type = 'FOREIGN KEY' AND kcu.table_name = ?
                     ) b ON a.column_name = b.fk_column WHERE a.table_catalog = ? AND a.table_name = ?";
+            
+            return DB::select($sql, [$table, $dbName, $table]);
         } else {
-            $sql = "SELECT a.column_name, a.data_type, a.character_maximum_length, a.is_nullable,
-                    b.REFERENCED_TABLE_NAME as ref_table, b.REFERENCED_COLUMN_NAME as ref_column
+            $sql = "SELECT a.column_name AS column_name, a.data_type AS data_type, 
+                    a.character_maximum_length AS character_maximum_length, a.is_nullable AS is_nullable,
+                    b.REFERENCED_TABLE_NAME AS ref_table, b.REFERENCED_COLUMN_NAME AS ref_column
                     FROM information_schema.columns a
                     LEFT JOIN information_schema.KEY_COLUMN_USAGE b ON a.table_name = b.table_name 
                     AND a.column_name = b.column_name AND b.REFERENCED_TABLE_NAME IS NOT NULL
                     WHERE a.table_schema = ? AND a.table_name = ?";
+            
+            return DB::select($sql, [$dbName, $table]);
         }
-        return DB::select($sql, [$table, $dbName, $table]);
     }
 
     private function writeFile($path, $content) {
