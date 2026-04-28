@@ -20,12 +20,12 @@ return [
         "class" => "App\Services\Crud\Add"
     ],
     [
-        "type" => "POST", // Atau PUT/PATCH sesuai preferensi
+        "type" => "PUT", 
         "end_point" => "/update",
         "class" => "App\Services\Crud\Edit"
     ],
     [
-        "type" => "POST", // Atau DELETE
+        "type" => "DELETE", 
         "end_point" => "/delete",
         "class" => "App\Services\Crud\Delete"
     ],
@@ -43,5 +43,15 @@ return [
         "type" => "POST",
         "end_point" => "/logout",
         "class" => "App\Services\Auth\DoLogout"
+    ],
+    [
+        "type" => "GET",
+        "end_point" => "/dashboard",
+        "class" => "App\Services\Dashboard\Dashboard"
+    ],
+    [
+        "type" => "GET",
+        "end_point" => "/dashboard-data",
+        "class" => "App\Services\Dashboard\DashboardData"
     ],
 ];

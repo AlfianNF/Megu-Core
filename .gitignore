@@ -29,3 +29,5 @@ database/migrations/2026_04_08_092335_create_categories_table.php
 app/Models/Categories.php
 database/migrations/2026_04_14_140217_create_orders_table.php
 app/Models/Orders.php
+app/Services/Dashboard/DashboardData.php
+app/Services/Dashboard/Dashboard.php

@@ -9,6 +9,16 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class CrudController extends Controller
 {
+    public function callService(Request $request, $serviceName)
+    {
+        $input = $request->all();
+        
+        $params = $request->route()->parameters();
+        $input = array_merge($input, $params);
+
+        return CallService::run($serviceName, $input);
+    }
+
     public function index($model)
     {
         return CallService::run("Get", ["model" => $model, ...request()->all()]);

@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware(['auth:api'])->group(function () {
+
+    $services = config('service') ?? []; 
+
+    foreach ($services as $service) {
+        $method = strtolower($service['type']);
+        $path = ltrim($service['end_point'], '/');
+
+        Route::$method($path, [CrudController::class, 'callService'])
+             ->defaults('serviceName', $service['class']);
+    }
     
     Route::get('logout', [AuthController::class, 'logout']);
     

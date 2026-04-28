@@ -31,7 +31,7 @@ class DoLogin extends CoreService
         $user = Users::where('username', $input['username'])->first();
 
         if (!$user || !\Illuminate\Support\Facades\Hash::check($input['password'], $user->password)) {
-            throw new \App\CoreService\CoreException("Username atau Password salah", 401);
+            throw new CoreException("Username atau Password salah", 401);
         }
 
         $token = auth('api')->login($user);
