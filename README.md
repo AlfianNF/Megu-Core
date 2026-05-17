@@ -11,7 +11,7 @@ Beberapa fitur unggulannya antara lain:
 - **Dynamic CRUD Engine**: Satu controller untuk menangani semua model secara dinamis.
 - **Automated Model Generator**: Membuat model lengkap dengan validasi dan lifecycle hooks secara otomatis.
 - **JWT Stateless Authentication**: Keamanan API modern menggunakan JSON Web Token.
-- **Dynamic Filtering**: Mendukung filter pencarian global dan filter rentang (misal: `price_min` & `price_max`) secara otomatis.
+- **Dynamic Filtering**: Mendukung filter pencarian global dan filter range (misal: `price_min` & `price_max`) secara otomatis.
 - **Auto-Swagger Documentation**: Dokumentasi API yang selalu sinkron dengan struktur Model Anda.
 - **Dynamic Export**: Mengubah hasil query API menjadi file Excel secara instan.
 
