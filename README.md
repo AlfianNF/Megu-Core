@@ -117,7 +117,7 @@ Megu-Core mendukung export data ke Excel secara dinamis untuk semua model. Cukup
 - **Filter Support**: Data yang di-export akan mengikuti filter yang Anda pasang di URL (misal: `?price_min=1000`).
 
 ### 14. Advanced Range Filtering
-Filter rentang otomatis tersedia untuk semua kolom numerik dan tanggal menggunakan suffix `_min` dan `_max`.
+Filter range otomatis tersedia untuk semua kolom numerik dan tanggal menggunakan suffix `_min` dan `_max`.
 - **Contoh URL**: `/api/products?price_min=5000&price_max=20000`
 
 ---
