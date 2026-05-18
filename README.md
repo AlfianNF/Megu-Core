@@ -97,7 +97,7 @@ php artisan generate:model (nama_table)
 Megu-Core menghilangkan beban penulisan dokumentasi API secara manual. Dengan satu perintah, framework akan membaca Model Anda dan menghasilkan file OpenAPI (Swagger).
 
 ### 11. Generate Swagger Documentation
-Jalankan perintah ini setiap kali Anda menambah model baru atau mengubah konstanta di Model:
+Jalankan command ini setiap kali Anda menambah model baru atau mengubah konstanta di Model:
 ```bash
 php artisan core:swagger
 ```
