@@ -11,7 +11,7 @@ Beberapa fitur unggulannya antara lain:
 - **Dynamic CRUD Engine**: Satu controller untuk menangani semua model secara dinamis.
 - **Automated Model Generator**: Membuat model lengkap dengan validasi dan lifecycle hooks secara otomatis.
 - **JWT Stateless Authentication**: Keamanan API modern menggunakan JSON Web Token.
-- **Dynamic Filtering**: Mendukung filter pencarian global dan filter rentang (misal: `price_min` & `price_max`) secara otomatis.
+- **Dynamic Filtering**: Mendukung filter pencarian global dan filter range (misal: `price_min` & `price_max`) secara otomatis.
 - **Auto-Swagger Documentation**: Dokumentasi API yang selalu sinkron dengan struktur Model Anda.
 - **Dynamic Export**: Mengubah hasil query API menjadi file Excel secara instan.
 
@@ -97,7 +97,7 @@ php artisan generate:model (nama_table)
 Megu-Core menghilangkan beban penulisan dokumentasi API secara manual. Dengan satu perintah, framework akan membaca Model Anda dan menghasilkan file OpenAPI (Swagger).
 
 ### 11. Generate Swagger Documentation
-Jalankan perintah ini setiap kali Anda menambah model baru atau mengubah konstanta di Model:
+Jalankan command ini setiap kali Anda menambah model baru atau mengubah konstanta di Model:
 ```bash
 php artisan core:swagger
 ```
@@ -117,7 +117,7 @@ Megu-Core mendukung export data ke Excel secara dinamis untuk semua model. Cukup
 - **Filter Support**: Data yang di-export akan mengikuti filter yang Anda pasang di URL (misal: `?price_min=1000`).
 
 ### 14. Advanced Range Filtering
-Filter rentang otomatis tersedia untuk semua kolom numerik dan tanggal menggunakan suffix `_min` dan `_max`.
+Filter range otomatis tersedia untuk semua kolom numerik dan tanggal menggunakan suffix `_min` dan `_max`.
 - **Contoh URL**: `/api/products?price_min=5000&price_max=20000`
 
 ---
