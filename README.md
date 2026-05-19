@@ -33,7 +33,7 @@ composer install
 ```
 
 ### 3. Setup Environment
-Copy file `.env.example`, buat file `.env` baru, lalu generate app key.
+Salin file `.env.example`, buat file `.env` baru, lalu generate app key.
 ```bash
 cp .env.example .env
 php artisan key:generate
