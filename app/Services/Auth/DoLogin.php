@@ -39,7 +39,7 @@ class DoLogin extends CoreService
         return [
             'user' => [
                 'id' => $user->id,
-                'name' => $user->name,
+                'name' => $user->fullname,
                 'username' => $user->username,
             ],
             'access_token' => $token,

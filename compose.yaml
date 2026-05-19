@@ -1,0 +1,41 @@
+services:
+  # App Service (Laravel)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: megu-core
+    container_name: megu-core
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+
+  # Web Server (Nginx)
+  webserver:
+    image: nginx:alpine
+    container_name: megu-core-backend
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    depends_on:
+      - app
+  
+  db:
+    image: postgres:15-alpine
+    container_name: megu-core-db
+    restart: always
+    environment:
+      POSTGRES_DB: framework
+      POSTGRES_USER: postgress
+      POSTGRES_PASSWORD: admin1234
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

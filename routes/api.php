@@ -17,6 +17,10 @@ Route::middleware(['auth:api'])->group(function () {
         $method = strtolower($service['type']);
         $path = ltrim($service['end_point'], '/');
 
+        if ($method === 'post' && $path === 'login') {
+            continue;
+        }
+
         Route::$method($path, [CrudController::class, 'callService'])
              ->defaults('serviceName', $service['class']);
     }
